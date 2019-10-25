@@ -1,0 +1,41 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: hello-java
+# spec:
+#   type: LoadBalancer
+#   ports:
+#     - port: 80
+#       targetPort: 8080
+#   selector:
+#     app: hello-java
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-java
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      maxSurge: 2
+  selector:
+    matchLabels:
+      app: hello-java
+  template:
+    metadata:
+      labels:
+        app: hello-java
+    spec:
+      containers:
+        - name: hello-java
+          image: CONTAINER_IMAGE
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          ports:
+            - containerPort: 80
+
