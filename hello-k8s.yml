@@ -32,10 +32,6 @@ spec:
       containers:
         - name: hello-java
           image: CONTAINER_IMAGE
-          securityContext:
-            privileged: false
-            readOnlyRootFilesystem: true
-            allowPrivilegeEscalation: false
           ports:
             - containerPort: 80
 
