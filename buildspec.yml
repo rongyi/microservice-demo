@@ -14,6 +14,8 @@ phases:
         - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' hello-k8s.yml
         - $(aws ecr get-login --no-include-email)
         - export KUBECONFIG=$HOME/.kube/config
+        - export REPOSITORY_URI=405563873263.dkr.ecr.ap-southeast-1.amazonaws.com/cicd-demo
+
   build:
     commands:
       - docker run --rm  -v $(pwd):/app maven:3.6.2-jdk-8  mvn -f /app/pom.xml clean package

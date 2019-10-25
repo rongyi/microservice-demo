@@ -7,4 +7,4 @@ COPY ./target/microservice-demo-0.0.1-SNAPSHOT.jar /app
 
 EXPOSE 80
 
-CMD ["java", "-jar", "/app/microservice-demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-Djava.io.tempdir=/app", "-jar", "/app/microservice-demo-0.0.1-SNAPSHOT.jar"]
